@@ -44,10 +44,4 @@ public class AuthReactiveRepositoryAdapter extends ReactiveAdapterOperations<Use
 
     }
 
-    @Override
-    public Flux<Users> findAllUsers() {
-        return repository.findAll()
-                .map(ele->mapper.mapBuilder(ele,Users.class));
-    }
-
 }
