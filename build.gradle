@@ -6,6 +6,7 @@ buildscript {
         jacocoVersion = '0.8.8'
         lombokVersion = '1.18.24'
 	}
+
 }
 
 plugins {
@@ -29,5 +30,6 @@ sonarqube {
         property "sonar.coverage.jacoco.xmlReportPaths", "build/reports/jacoco/test/jacocoTestReport.xml"
     }
 }
+
 
 apply from: './main.gradle'
