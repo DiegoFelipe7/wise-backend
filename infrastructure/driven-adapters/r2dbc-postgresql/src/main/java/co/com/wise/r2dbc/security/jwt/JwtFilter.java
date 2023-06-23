@@ -1,6 +1,8 @@
 package co.com.wise.r2dbc.security.jwt;
 
 
+import co.com.wise.r2dbc.exception.CustomException;
+import co.com.wise.r2dbc.exception.TypeStateResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -34,10 +36,10 @@ public class JwtFilter implements WebFilter {
         }
         String auth = request.getHeaders().getFirst(HttpHeaders.AUTHORIZATION);
         if (auth == null) {
-            return Mono.error(new NullPointerException("No hay token"));
+            return Mono.error(new CustomException(HttpStatus.BAD_REQUEST, "no se ha encontrado ningún token", TypeStateResponse.Error));
         }
         if (!auth.startsWith("Bearer ")) {
-            return Mono.error(new NullPointerException(""));
+            return Mono.error(new CustomException(HttpStatus.BAD_REQUEST, "autentificación inválida", TypeStateResponse.Error));
         }
         String token = auth.replace("Bearer ", "");
         exchange.getAttributes().put("token", token);

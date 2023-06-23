@@ -1,7 +1,7 @@
 package co.com.wise.api;
 
-import ch.qos.logback.core.subst.Token;
 import co.com.wise.model.users.Login;
+import co.com.wise.model.users.Token;
 import co.com.wise.model.users.Users;
 import co.com.wise.usecase.auth.getusers.GetusersUseCase;
 import co.com.wise.usecase.auth.login.LoginUseCase;
@@ -22,7 +22,7 @@ public class Handler {
         return serverRequest.bodyToMono(Login.class)
                 .flatMap(ele -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON)
-                        .body(loginUseCase.apply(ele), Login.class));
+                        .body(loginUseCase.apply(ele), Users.class));
     }
 
     public Mono<ServerResponse> users(ServerRequest serverRequest) {
